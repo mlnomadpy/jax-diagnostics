@@ -14,3 +14,16 @@ Use a fresh output directory. Add `--preflight-only` to validate the cases and r
 - [Case programs, provenance, and checks](cases.py)
 - First round · [Per-trial metrics](results.json) · [Submitted patches](proposals.json)
 - Rerun with new routes · [Per-trial metrics](results-routed.json) · [Submitted patches](proposals-routed.json)
+
+## Compare two skill revisions
+
+```sh
+JAX_PLATFORMS=cpu PYTHONPATH=. \
+  .venv-repair/bin/python benchmarks/tool_repair/run_with_tools.py \
+  /tmp/jax-tool-repair-paired --compare-skill-to e79f746
+```
+
+This mode tests the current skill files against a Git revision that contains the same routes. Both versions get the same failing traceback and route. Only the skill text and routed guide excerpt vary. Each of four waves starts two matched case/repetition pairs, with both versions in each pair. The runner records the comparison revision and a byte count and SHA-256 for the guidance supplied to each condition.
+
+- [Paired results and interrupted attempts](results-paired-skills.json)
+- [Submitted patches from both versions](proposals-paired-skills.json)

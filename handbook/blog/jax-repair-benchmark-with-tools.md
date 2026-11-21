@@ -56,3 +56,24 @@ Across just the four skill trials that received new guidance, median gross input
 The new routes gave both failures specific guidance. This rerun showed no reduction in time, uncached input, or test runs on those cases. Even with identical prompts, the raw-traceback and upstream-docs medians moved by about three seconds and two seconds in opposite directions. We ran the old and updated skill in separate rounds, so these measurements cannot isolate the effect of the new guidance from run-to-run variation.
 
 This is still a small CPU study. We ran two attempts per condition, tested public reports that the model may have encountered, and used bounded reproductions. Per-arm medians describe the observed runs. A repeatable difference across models, runtimes, or concurrency levels remains unverified. A follow-up with more held-out cases could add cases requiring multiple hypotheses, such as accelerator-only bugs and failures whose traceback identifies the wrong-looking layer.
+
+## Side-by-side test of shorter guidance
+
+We shortened the shared skill instructions and the four guide sections used here. Each still names the boundary the repair must preserve, such as static output shape for padding or the original stopping rule for a solver. The text supplied by the skill, including the routed excerpt, was 37–41% smaller across the four cases.
+
+We ran both versions in the same round with the same Codex CLI, model, reasoning effort, CPU runtime, and independent verifier as above. Each of the four cases ran twice per version in fresh sessions. Four waves each started two matched pairs, with the old and shorter guidance represented in every wave. The paired agent prompts shared the same task, traceback, and route. Only the guidance text differed. [Benchmark source and instructions](https://github.com/mlnomadpy/jax-diagnostics/tree/main/benchmarks/tool_repair)
+
+Four sessions timed out before returning a patch, and four ended with a Codex workspace routing error before any tool calls. These affected four complete pairs. We relaunched those pairs together with the same prompts and retained the original attempts in the per-trial record. The comparison uses the completed attempts and measures repair time, so the time spent waiting on the interrupted sessions is outside the comparison.
+
+| Metric | Original guidance | Shorter guidance |
+| --- | ---: | ---: |
+| Verified fixes | 8/8 | 8/8 |
+| Median agent time | 37.29 s | 36.68 s |
+| Median gross input tokens | 106,176 | 105,650.5 |
+| Median uncached input tokens | 14,584.5 | 14,300.5 |
+| Median output tokens | 1,059 | 1,052.5 |
+| Public smoke tests, total | 10 | 8 |
+
+Shorter guidance used fewer gross input tokens in seven of eight matched pairs. The median within-pair saving was 27,271 gross input tokens, and total gross input fell 12.8% (954,081 → 832,206). The pooled medians in the table are closer because they rank the eight runs in each condition separately. For uncached input, the median within-pair saving was 551 tokens. Gross input counts cached tokens and repeated tool context, so the two token measures describe different parts of the workload.
+
+The shorter version was faster in five of eight pairs, with a median within-pair saving of 1.09 seconds. Both extra smoke tests came from one original-guidance batched-padding run. Across these four cases, the shorter version kept all verified fixes and used less input overall. Two repetitions per case give limited evidence about how repeatable the timing and smoke-test differences are. [Per-trial measurements and interrupted attempts](https://github.com/mlnomadpy/jax-diagnostics/blob/main/benchmarks/tool_repair/results-paired-skills.json) · [Submitted patches](https://github.com/mlnomadpy/jax-diagnostics/blob/main/benchmarks/tool_repair/proposals-paired-skills.json)
