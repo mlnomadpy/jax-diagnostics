@@ -1,6 +1,14 @@
 # Quickstart
 
-Use Python 3.11 or newer. Install the diagnostics package from GitHub. Your training project supplies its own JAX installation and accelerator runtime.
+Use Python 3.11 or newer. Install the diagnostics package using one of the commands below. Your training project supplies its own JAX installation and accelerator runtime.
+
+After the first PyPI release is available:
+
+```sh
+python -m pip install jax-diagnostics
+```
+
+Until then, install from GitHub.
 
 ```sh
 python -m pip install "git+https://github.com/mlnomadpy/jax-diagnostics.git"

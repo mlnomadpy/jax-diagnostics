@@ -18,7 +18,13 @@ For a non-interactive Codex install, add `--agent codex --yes`. Add `--global` t
 
 ## Use it in training
 
-Install from GitHub with Python 3.11 or newer.
+Use Python 3.11 or newer. Once the first PyPI release is available:
+
+```sh
+python -m pip install jax-diagnostics
+```
+
+Until then, install from GitHub.
 
 ```sh
 python -m pip install "git+https://github.com/mlnomadpy/jax-diagnostics.git"
@@ -67,3 +73,7 @@ All 12 named exceptions in the pinned public `jax.errors` module have dedicated 
 ## Development
 
 See the [development and release guide](https://www.tahabouhsine.com/jax-diagnostics/docs/development/) for building the docs, testing the skill, and preparing PyPI artifacts.
+
+## License
+
+[MIT](https://github.com/mlnomadpy/jax-diagnostics/blob/main/LICENSE).
