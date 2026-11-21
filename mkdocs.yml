@@ -28,5 +28,6 @@ nav:
   - Blog:
       - Blog home: blog/index.md
       - Why put repair links in tracebacks?: blog/repair-links-in-tracebacks.md
+      - JAX repair benchmark: blog/jax-repair-benchmark.md
   - Roadmap: roadmap.md
   - Development and releases: development.md

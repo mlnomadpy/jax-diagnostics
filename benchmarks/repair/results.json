@@ -1,0 +1,207 @@
+{
+  "model": "gpt-6.1-sol",
+  "codex_cli": "0.169.1",
+  "reasoning_effort": "low",
+  "jax": "0.10.0",
+  "jaxlib": "0.10.0",
+  "numpy": "2.4.6",
+  "backend": "cpu",
+  "python": "3.13.13",
+  "schedule_seed": 20261121,
+  "max_concurrent_trials": 3,
+  "guide_revision": "1cdd9ee",
+  "trials": [
+    {
+      "case": "dynamic-prefix",
+      "arm": "raw",
+      "verified": true,
+      "seconds": 8.924,
+      "usage": {
+        "input_tokens": 25033,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 199,
+        "reasoning_output_tokens": 55
+      },
+      "status": "passed",
+      "schedule_position": 0,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "matrix-chain",
+      "arm": "raw",
+      "verified": true,
+      "seconds": 7.385,
+      "usage": {
+        "input_tokens": 24530,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 98,
+        "reasoning_output_tokens": 24
+      },
+      "status": "passed",
+      "schedule_position": 1,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "empty-prng-batch",
+      "arm": "raw",
+      "verified": true,
+      "seconds": 6.959,
+      "usage": {
+        "input_tokens": 24658,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 109,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 2,
+      "first_verification_status": "failed_checks"
+    },
+    {
+      "case": "dynamic-prefix",
+      "arm": "docs",
+      "verified": true,
+      "seconds": 9.063,
+      "usage": {
+        "input_tokens": 25543,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 186,
+        "reasoning_output_tokens": 42
+      },
+      "status": "passed",
+      "schedule_position": 3,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "empty-prng-batch",
+      "arm": "skill",
+      "verified": true,
+      "seconds": 7.73,
+      "usage": {
+        "input_tokens": 25130,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 109,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 4,
+      "first_verification_status": "failed_checks"
+    },
+    {
+      "case": "convergence-loop",
+      "arm": "raw",
+      "verified": true,
+      "seconds": 10.522,
+      "usage": {
+        "input_tokens": 24618,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 239,
+        "reasoning_output_tokens": 52
+      },
+      "status": "passed",
+      "schedule_position": 5,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "empty-prng-batch",
+      "arm": "docs",
+      "verified": true,
+      "seconds": 7.551,
+      "usage": {
+        "input_tokens": 24868,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 109,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 6,
+      "first_verification_status": "failed_checks"
+    },
+    {
+      "case": "convergence-loop",
+      "arm": "docs",
+      "verified": true,
+      "seconds": 10.612,
+      "usage": {
+        "input_tokens": 25271,
+        "cached_input_tokens": 12160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 244,
+        "reasoning_output_tokens": 61
+      },
+      "status": "passed",
+      "schedule_position": 7,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "matrix-chain",
+      "arm": "skill",
+      "verified": true,
+      "seconds": 6.758,
+      "usage": {
+        "input_tokens": 25002,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 98,
+        "reasoning_output_tokens": 24
+      },
+      "status": "passed",
+      "schedule_position": 8,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "matrix-chain",
+      "arm": "docs",
+      "verified": true,
+      "seconds": 6.415,
+      "usage": {
+        "input_tokens": 24984,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 72,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 9,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "convergence-loop",
+      "arm": "skill",
+      "verified": true,
+      "seconds": 9.786,
+      "usage": {
+        "input_tokens": 25116,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 242,
+        "reasoning_output_tokens": 51
+      },
+      "status": "passed",
+      "schedule_position": 10,
+      "first_verification_status": "passed"
+    },
+    {
+      "case": "dynamic-prefix",
+      "arm": "skill",
+      "verified": true,
+      "seconds": 9.804,
+      "usage": {
+        "input_tokens": 25601,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 223,
+        "reasoning_output_tokens": 79
+      },
+      "status": "passed",
+      "schedule_position": 11,
+      "first_verification_status": "passed"
+    }
+  ]
+}
