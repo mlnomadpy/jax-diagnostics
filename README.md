@@ -4,6 +4,16 @@
 
 [Landing page](https://mlnomadpy.github.io/jax-diagnostics/) · [Agent skill](SKILL.md) · [Diagnostic guides](#diagnostic-guides)
 
+## Install the agent skill
+
+Run this from your project with Node.js 22.20 or newer and select your coding agent when prompted.
+
+```sh
+npx skills add mlnomadpy/jax-diagnostics
+```
+
+For a non-interactive Codex install, add `--agent codex --yes`. Add `--global` to install across projects. Then invoke `$jax-diagnostics` in Codex with the error and the failing operation or backend. The skill installer installs the guide and its files. The Python wrapper below is installed separately. [Supported agents and installer options](https://github.com/vercel-labs/skills#install-a-skill)
+
 ## Use it in training
 
 Install from GitHub with Python 3.11 or newer.
@@ -39,14 +49,6 @@ jax-diagnose --json < traceback.txt
 ```
 
 From a checkout, `python3 scripts/diagnose.py` also works with Python 3.10 or newer. The CLI exits with status 1 when it finds no match.
-
-## Use the agent skill
-
-Clone the repo into your Codex skills directory, then invoke `$jax-diagnostics` with the failure and the operation or backend involved.
-
-```sh
-git clone https://github.com/mlnomadpy/jax-diagnostics.git ~/.codex/skills/jax-diagnostics
-```
 
 ## Diagnostic guides
 
