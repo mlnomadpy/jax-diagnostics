@@ -18,16 +18,10 @@ For a non-interactive Codex install, add `--agent codex --yes`. Add `--global` t
 
 ## Use it in training
 
-Use Python 3.11 or newer. Once the first PyPI release is available:
+Use Python 3.11 or newer and install from [PyPI](https://pypi.org/project/jax-diagnostics/).
 
 ```sh
 python -m pip install jax-diagnostics
-```
-
-Until then, install from GitHub.
-
-```sh
-python -m pip install "git+https://github.com/mlnomadpy/jax-diagnostics.git"
 ```
 
 Wrap the host-side entry point in `train.py` and run it as usual.
