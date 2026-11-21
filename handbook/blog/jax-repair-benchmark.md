@@ -4,6 +4,8 @@
 
 This is a first test of the idea behind [repair links in tracebacks](repair-links-in-tracebacks.md). We used public JAX reports, generated fresh tracebacks, and scored the returned code with independent checks.
 
+Our [tool-enabled follow-up](jax-repair-benchmark-with-tools.md) runs two repeats per condition on four harder cases and counts test invocations.
+
 ## The cases
 
 | Case | Reproduced failure | What the verifier checks |

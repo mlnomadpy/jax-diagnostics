@@ -1,0 +1,454 @@
+{
+  "model": "gpt-6.1-sol",
+  "codex_cli": "0.169.1",
+  "reasoning_effort": "low",
+  "jax": "0.10.0",
+  "jaxlib": "0.10.0",
+  "numpy": "2.4.6",
+  "python": "3.13.13",
+  "backend": "cpu",
+  "schedule_seed": 20261122,
+  "agents_in_parallel": 4,
+  "repetitions_per_cell": 2,
+  "guide_revision": "da01909",
+  "skill_routes": {
+    "masked-angle": "JAX-NUM-001",
+    "batched-padding": null,
+    "bounded-solver-vjp": null,
+    "closed-over-implicit-vjp": "JAX-TRACE-002"
+  },
+  "trials": [
+    {
+      "case": "batched-padding",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 40.388,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 103705,
+        "cached_input_tokens": 89472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 790,
+        "reasoning_output_tokens": 21
+      },
+      "status": "passed",
+      "schedule_position": 0
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 38.951,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 130740,
+        "cached_input_tokens": 116224,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1162,
+        "reasoning_output_tokens": 111
+      },
+      "status": "passed",
+      "schedule_position": 1
+    },
+    {
+      "case": "batched-padding",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 37.229,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 105606,
+        "cached_input_tokens": 76288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1009,
+        "reasoning_output_tokens": 48
+      },
+      "status": "passed",
+      "schedule_position": 2
+    },
+    {
+      "case": "masked-angle",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 19.302,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 77112,
+        "cached_input_tokens": 63232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 393,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 3
+    },
+    {
+      "case": "masked-angle",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 52.817,
+      "test_runs": 2,
+      "shell_commands": 6,
+      "usage": {
+        "input_tokens": 104400,
+        "cached_input_tokens": 89984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1164,
+        "reasoning_output_tokens": 75
+      },
+      "status": "passed",
+      "schedule_position": 4
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 35.633,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 103869,
+        "cached_input_tokens": 89728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 991,
+        "reasoning_output_tokens": 72
+      },
+      "status": "passed",
+      "schedule_position": 5
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 37.974,
+      "test_runs": 2,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 102937,
+        "cached_input_tokens": 88960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1140,
+        "reasoning_output_tokens": 257
+      },
+      "status": "passed",
+      "schedule_position": 6
+    },
+    {
+      "case": "batched-padding",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 25.412,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 79056,
+        "cached_input_tokens": 64640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 751,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 7
+    },
+    {
+      "case": "batched-padding",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 34.529,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 131461,
+        "cached_input_tokens": 116736,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 879,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 8
+    },
+    {
+      "case": "batched-padding",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 26.672,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 77498,
+        "cached_input_tokens": 63488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 721,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 9
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 34.143,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 103875,
+        "cached_input_tokens": 89728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 998,
+        "reasoning_output_tokens": 20
+      },
+      "status": "passed",
+      "schedule_position": 10
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 45.793,
+      "test_runs": 2,
+      "shell_commands": 6,
+      "usage": {
+        "input_tokens": 106281,
+        "cached_input_tokens": 91264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1496,
+        "reasoning_output_tokens": 257
+      },
+      "status": "passed",
+      "schedule_position": 11
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 31.978,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 127679,
+        "cached_input_tokens": 113664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 890,
+        "reasoning_output_tokens": 42
+      },
+      "status": "passed",
+      "schedule_position": 12
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 39.151,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 102336,
+        "cached_input_tokens": 88704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1014,
+        "reasoning_output_tokens": 100
+      },
+      "status": "passed",
+      "schedule_position": 13
+    },
+    {
+      "case": "masked-angle",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 34.867,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 104356,
+        "cached_input_tokens": 90112,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 995,
+        "reasoning_output_tokens": 72
+      },
+      "status": "passed",
+      "schedule_position": 14
+    },
+    {
+      "case": "masked-angle",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 20.776,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 100583,
+        "cached_input_tokens": 86912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 438,
+        "reasoning_output_tokens": 31
+      },
+      "status": "passed",
+      "schedule_position": 15
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 19.524,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 77829,
+        "cached_input_tokens": 63744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 440,
+        "reasoning_output_tokens": 54
+      },
+      "status": "passed",
+      "schedule_position": 16
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 44.183,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 132390,
+        "cached_input_tokens": 117504,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1221,
+        "reasoning_output_tokens": 44
+      },
+      "status": "passed",
+      "schedule_position": 17
+    },
+    {
+      "case": "masked-angle",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 20.032,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 103353,
+        "cached_input_tokens": 75136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 396,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 18
+    },
+    {
+      "case": "masked-angle",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 21.818,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 100614,
+        "cached_input_tokens": 87040,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 460,
+        "reasoning_output_tokens": 67
+      },
+      "status": "passed",
+      "schedule_position": 19
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 38.156,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 104845,
+        "cached_input_tokens": 90496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1121,
+        "reasoning_output_tokens": 85
+      },
+      "status": "passed",
+      "schedule_position": 20
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 24.314,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 78005,
+        "cached_input_tokens": 63872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 624,
+        "reasoning_output_tokens": 92
+      },
+      "status": "passed",
+      "schedule_position": 21
+    },
+    {
+      "case": "batched-padding",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 28.98,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 105668,
+        "cached_input_tokens": 76800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 768,
+        "reasoning_output_tokens": 14
+      },
+      "status": "passed",
+      "schedule_position": 22
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 21.777,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 76517,
+        "cached_input_tokens": 62848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 550,
+        "reasoning_output_tokens": 51
+      },
+      "status": "passed",
+      "schedule_position": 23
+    }
+  ]
+}
