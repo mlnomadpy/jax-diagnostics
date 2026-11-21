@@ -1,3 +1,3 @@
 # Blog
 
-- [Why put repair links in tracebacks?](repair-links-in-tracebacks.md) explains the idea and walks through a JIT error from traceback to verified fix.
+- [Why put repair links in tracebacks?](repair-links-in-tracebacks.md) looks at how coding agents debug unfamiliar frameworks, how versioned skills carry guidance without retraining, and how JAX Diagnostics routes a JIT failure to a verified fix.
