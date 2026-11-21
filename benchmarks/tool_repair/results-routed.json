@@ -1,0 +1,454 @@
+{
+  "model": "gpt-6.1-sol",
+  "codex_cli": "0.169.1",
+  "reasoning_effort": "low",
+  "jax": "0.10.0",
+  "jaxlib": "0.10.0",
+  "numpy": "2.4.6",
+  "python": "3.13.13",
+  "backend": "cpu",
+  "schedule_seed": 20261122,
+  "agents_in_parallel": 4,
+  "repetitions_per_cell": 2,
+  "guide_revision": "edbc34852f0b793cd0a37b2f699b1caac7cf1375",
+  "skill_routes": {
+    "masked-angle": "JAX-NUM-001",
+    "batched-padding": "JAX-INDEX-002",
+    "bounded-solver-vjp": "JAX-GRAD-002",
+    "closed-over-implicit-vjp": "JAX-TRACE-002"
+  },
+  "trials": [
+    {
+      "case": "batched-padding",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 30.506,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 103721,
+        "cached_input_tokens": 89600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 845,
+        "reasoning_output_tokens": 13
+      },
+      "status": "passed",
+      "schedule_position": 0
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 39.304,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 105758,
+        "cached_input_tokens": 91264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1074,
+        "reasoning_output_tokens": 15
+      },
+      "status": "passed",
+      "schedule_position": 1
+    },
+    {
+      "case": "batched-padding",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 37.946,
+      "test_runs": 2,
+      "shell_commands": 7,
+      "usage": {
+        "input_tokens": 135375,
+        "cached_input_tokens": 119424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1083,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 2
+    },
+    {
+      "case": "masked-angle",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 19.446,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 103341,
+        "cached_input_tokens": 88960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 400,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 3
+    },
+    {
+      "case": "masked-angle",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 44.693,
+      "test_runs": 2,
+      "shell_commands": 6,
+      "usage": {
+        "input_tokens": 155264,
+        "cached_input_tokens": 140544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1098,
+        "reasoning_output_tokens": 39
+      },
+      "status": "passed",
+      "schedule_position": 4
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 39.867,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 128953,
+        "cached_input_tokens": 100480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1267,
+        "reasoning_output_tokens": 123
+      },
+      "status": "passed",
+      "schedule_position": 5
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 38.488,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 128136,
+        "cached_input_tokens": 114176,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1139,
+        "reasoning_output_tokens": 119
+      },
+      "status": "passed",
+      "schedule_position": 6
+    },
+    {
+      "case": "batched-padding",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 30.314,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 105688,
+        "cached_input_tokens": 91008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 776,
+        "reasoning_output_tokens": 21
+      },
+      "status": "passed",
+      "schedule_position": 7
+    },
+    {
+      "case": "batched-padding",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 34.829,
+      "test_runs": 2,
+      "shell_commands": 6,
+      "usage": {
+        "input_tokens": 108293,
+        "cached_input_tokens": 92544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 994,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 8
+    },
+    {
+      "case": "batched-padding",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 27.033,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 77549,
+        "cached_input_tokens": 63616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 752,
+        "reasoning_output_tokens": 0
+      },
+      "status": "passed",
+      "schedule_position": 9
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 43.606,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 104329,
+        "cached_input_tokens": 77312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1269,
+        "reasoning_output_tokens": 155
+      },
+      "status": "passed",
+      "schedule_position": 10
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 43.718,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 132698,
+        "cached_input_tokens": 117760,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1292,
+        "reasoning_output_tokens": 69
+      },
+      "status": "passed",
+      "schedule_position": 11
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 40.964,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 128192,
+        "cached_input_tokens": 88320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1161,
+        "reasoning_output_tokens": 110
+      },
+      "status": "passed",
+      "schedule_position": 12
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 25.594,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 76664,
+        "cached_input_tokens": 50176,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 675,
+        "reasoning_output_tokens": 144
+      },
+      "status": "passed",
+      "schedule_position": 13
+    },
+    {
+      "case": "masked-angle",
+      "arm": "skill",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 35.633,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 154790,
+        "cached_input_tokens": 126848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 940,
+        "reasoning_output_tokens": 33
+      },
+      "status": "passed",
+      "schedule_position": 14
+    },
+    {
+      "case": "masked-angle",
+      "arm": "raw",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 22.1,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 100588,
+        "cached_input_tokens": 86912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 488,
+        "reasoning_output_tokens": 80
+      },
+      "status": "passed",
+      "schedule_position": 15
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 23.192,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 77318,
+        "cached_input_tokens": 63360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 541,
+        "reasoning_output_tokens": 66
+      },
+      "status": "passed",
+      "schedule_position": 16
+    },
+    {
+      "case": "closed-over-implicit-vjp",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 43.69,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 157913,
+        "cached_input_tokens": 127744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1237,
+        "reasoning_output_tokens": 71
+      },
+      "status": "passed",
+      "schedule_position": 17
+    },
+    {
+      "case": "masked-angle",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 21.363,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 77703,
+        "cached_input_tokens": 63616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 435,
+        "reasoning_output_tokens": 39
+      },
+      "status": "passed",
+      "schedule_position": 18
+    },
+    {
+      "case": "masked-angle",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 21.451,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 100492,
+        "cached_input_tokens": 86784,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 422,
+        "reasoning_output_tokens": 24
+      },
+      "status": "passed",
+      "schedule_position": 19
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "skill",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 38.075,
+      "test_runs": 1,
+      "shell_commands": 5,
+      "usage": {
+        "input_tokens": 105307,
+        "cached_input_tokens": 90880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1145,
+        "reasoning_output_tokens": 90
+      },
+      "status": "passed",
+      "schedule_position": 20
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "docs",
+      "repeat": 1,
+      "verified": true,
+      "seconds": 24.23,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 77909,
+        "cached_input_tokens": 50560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 551,
+        "reasoning_output_tokens": 73
+      },
+      "status": "passed",
+      "schedule_position": 21
+    },
+    {
+      "case": "batched-padding",
+      "arm": "docs",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 29.893,
+      "test_runs": 1,
+      "shell_commands": 4,
+      "usage": {
+        "input_tokens": 105647,
+        "cached_input_tokens": 91008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 759,
+        "reasoning_output_tokens": 13
+      },
+      "status": "passed",
+      "schedule_position": 22
+    },
+    {
+      "case": "bounded-solver-vjp",
+      "arm": "raw",
+      "repeat": 2,
+      "verified": true,
+      "seconds": 25.372,
+      "test_runs": 1,
+      "shell_commands": 3,
+      "usage": {
+        "input_tokens": 76611,
+        "cached_input_tokens": 62976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 626,
+        "reasoning_output_tokens": 88
+      },
+      "status": "passed",
+      "schedule_position": 23
+    }
+  ]
+}

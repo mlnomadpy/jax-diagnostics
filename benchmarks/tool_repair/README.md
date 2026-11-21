@@ -12,5 +12,5 @@ JAX_PLATFORMS=cpu PYTHONPATH=. \
 Use a fresh output directory. Add `--preflight-only` to validate the cases and reference fixes without model calls. A full run submits 24 agent requests. The runner shuffles the schedule with seed 20261122 and allows four concurrent trials. Raw event logs, candidate modules, verification output, and measured rows are written to the output directory. Agent wall time includes tool calls and public checks but excludes the independent verifier. Test runs count calls to the public `./check` wrapper.
 
 - [Case programs, provenance, and checks](cases.py)
-- [Per-trial metrics](results.json)
-- [Submitted patches](proposals.json)
+- First round · [Per-trial metrics](results.json) · [Submitted patches](proposals.json)
+- Rerun with new routes · [Per-trial metrics](results-routed.json) · [Submitted patches](proposals-routed.json)
