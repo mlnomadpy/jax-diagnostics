@@ -1,22 +1,18 @@
 # JAX Diagnostics
 
-A standalone agent skill that routes JAX and accelerator failures to focused repair guides. Inspired by [Solid 2.0 diagnostics](https://www.solidjs.com/blog/solid-2-0-the-long-hold/).
+**Put a repair guide in the traceback.** JAX Diagnostics is a standalone Python library, CLI, and agent skill for JAX errors. It follows the diagnostic pattern in [Solid 2.0](https://www.solidjs.com/blog/solid-2-0-the-long-hold/). A matched failure gets a stable diagnostic ID and a link to the relevant guide.
 
-Start with the [diagnostic index](SKILL.md). Give your agent the exception, the failing transform or operation, and the backend. For example, a `TracerBoolConversionError` points to [JAX-TRACE-003](references/tracing.md#jax-trace-003) and a TPU-only NaN points to [JAX-NUM-001](references/numerics.md#jax-num-001).
+[Landing page](https://mlnomadpy.github.io/jax-diagnostics/) · [Agent skill](SKILL.md) · [Diagnostic guides](#diagnostic-guides)
 
-To use it as a Codex skill, clone this repository into `~/.codex/skills/jax-diagnostics` and invoke `$jax-diagnostics` with your error or symptom. The skill is documentation and works without installing JAX, Flax, or Python. Existing JAX errors and application code can be used as-is.
+## Use it in training
 
-Each guide gives a trigger, a way to distinguish likely causes, and a check for the repair. The diagnostic IDs belong to this repository.
-
-## Add diagnostics to a training entry point
-
-Install from a checkout of this repository with Python 3.11 or newer.
+Install from GitHub with Python 3.11 or newer.
 
 ```sh
-python -m pip install .
+python -m pip install "git+https://github.com/mlnomadpy/jax-diagnostics.git"
 ```
 
-In your training project, wrap the existing entry point outside `jax.jit`.
+Wrap the host-side entry point in `train.py` and run it as usual.
 
 ```python
 from jax_diagnostics import annotate_errors
@@ -26,17 +22,44 @@ if __name__ == "__main__":
         main()
 ```
 
-A matched failure includes the diagnostic ID and guide URL in its traceback. The context manager re-raises the original exception. It only runs diagnostics when an exception exits the block. Pass `guide_base` to use a pinned revision or a mirror that serves the guide files. The default URLs use this GitHub repo and require access while the repo is private.
+For example, a `TracerBoolConversionError` gets this note below the original exception.
 
-## Route an error from the terminal
-
-```sh
-python3 scripts/diagnose.py TracerBoolConversionError
-python3 scripts/diagnose.py --json < traceback.txt
+```text
+[JAX-TRACE-003] Traced Python boolean conversion
+Agent repair guide: https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/tracing.md#jax-trace-003
 ```
 
-The checkout CLI uses Python 3.10 or newer and the standard library. An installed package also exposes `jax-diagnose`. It returns exit status 1 for an unrecognized failure. Symptom matches are starting points for diagnosis.
+The wrapper preserves the exception type, traceback, and exit behavior. It runs diagnostics only when an exception leaves the block. Pass `guide_base` to link to a pinned revision or a mirror. The package has no runtime dependencies.
 
-The catalog covers all 12 named exceptions in the [pinned public JAX error module](https://github.com/jax-ml/jax/blob/7261b7bfe9c6e75d04a2e36f0387977def874fe0/jax/errors.py), plus common failures that use generic exceptions or backend status text. JAX operations, third-party libraries and device runtimes can also emit other messages.
+## Diagnose a saved traceback
 
-Run `python3 -m unittest discover -s tests` to verify routing and guide links.
+```sh
+jax-diagnose TracerBoolConversionError
+jax-diagnose --json < traceback.txt
+```
+
+From a checkout, `python3 scripts/diagnose.py` also works with Python 3.10 or newer. The CLI exits with status 1 when it finds no match.
+
+## Use the agent skill
+
+Clone the repo into your Codex skills directory, then invoke `$jax-diagnostics` with the failure and the operation or backend involved.
+
+```sh
+git clone https://github.com/mlnomadpy/jax-diagnostics.git ~/.codex/skills/jax-diagnostics
+```
+
+## Diagnostic guides
+
+All 12 named exceptions in the pinned public `jax.errors` module have dedicated routes. Symptom matches suggest where to start inspecting a failure. [Upstream error inventory](https://github.com/jax-ml/jax/blob/7261b7bfe9c6e75d04a2e36f0387977def874fe0/jax/errors.py)
+
+| Guide | What it covers |
+| --- | --- |
+| [Tracing](references/tracing.md) | Concretization, tracer escapes, Python and NumPy conversions, boolean indexing |
+| [Shapes and types](references/shapes.md) | Symbolic dimensions, broadcasting, dtypes, indexing |
+| [Transforms and state](references/transforms.md) | Jaxpr, PRNG key reuse, gradients, mapped axes, Flax state |
+| [Numerics and parity](references/numerics.md) | NaNs, infinities, and cross-framework mismatches |
+| [Runtime and restore](references/runtime.md) | Compilation, memory, sharding, collectives, Pallas, and Orbax |
+
+## Development
+
+Run `python3 -m unittest discover -s tests` to verify the router, guides, and exception notes. The landing page is plain HTML, CSS, and JavaScript. Open [docs/index.html](docs/index.html) directly or serve it with `python3 -m http.server --directory docs`.

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Attach focused repair guides to JAX exceptions with one opt-in Python wrapper.">
+  <title>JAX Diagnostics — Repair guides in your traceback</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <header class="wrap masthead">
+    <a class="wordmark" href="./">jax<span>.</span>diagnostics</a>
+    <nav aria-label="Main navigation">
+      <a href="#quickstart">Quickstart</a>
+      <a href="https://github.com/mlnomadpy/jax-diagnostics">GitHub</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="headline">
+      <div>
+        <h1 id="headline">A repair guide in every matched traceback.</h1>
+        <p>Link a JAX failure to the checks that help you diagnose it. Add one wrapper to your training entry point and run your script as usual.</p>
+        <a class="button" href="#quickstart">Add to train.py</a>
+      </div>
+      <figure class="terminal">
+        <figcaption>Traceback preview</figcaption>
+        <div class="examples" role="group" aria-label="Example failures">
+          <button type="button" data-example="tracer" aria-pressed="true">Tracer</button>
+          <button type="button" data-example="memory" aria-pressed="false">Device memory</button>
+          <button type="button" data-example="rng" aria-pressed="false">PRNG</button>
+        </div>
+        <div class="output" aria-live="polite">
+          <pre id="error">jax.errors.TracerBoolConversionError:
+Attempted boolean conversion of traced array.</pre>
+          <div class="note">
+            <code id="diagnostic-id">JAX-TRACE-003</code>
+            <strong id="diagnostic-title">Traced Python boolean conversion</strong>
+            <a id="repair-guide" href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/tracing.md#jax-trace-003">Open repair guide</a>
+          </div>
+        </div>
+      </figure>
+    </section>
+
+    <section class="quickstart" id="quickstart" aria-labelledby="quickstart-title">
+      <div>
+        <h2 id="quickstart-title">Use it in your training script</h2>
+        <p>Install with Python 3.11 or newer. Wrap the host-side entry point, outside JIT. On failure, the wrapper adds a note and re-raises the original exception.</p>
+      </div>
+      <div class="setup">
+        <div>
+          <h3>Install from GitHub</h3>
+          <pre><code>python -m pip install "git+https://github.com/mlnomadpy/jax-diagnostics.git"</code></pre>
+        </div>
+        <div>
+          <h3>train.py</h3>
+          <pre><code>from jax_diagnostics import annotate_errors
+
+if __name__ == "__main__":
+    with annotate_errors():
+        main()</code></pre>
+        </div>
+      </div>
+    </section>
+    <section class="guides" aria-labelledby="guides-title">
+      <h2 id="guides-title">Browse the guides</h2>
+      <p>Find a route for all 12 public JAX exception types in the pinned catalog, plus common runtime symptoms.</p>
+      <ul>
+        <li><a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/tracing.md">Tracing and conversions</a></li>
+        <li><a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/shapes.md">Shapes and types</a></li>
+        <li><a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/transforms.md">Transforms and state</a></li>
+        <li><a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/numerics.md">Numerics and parity</a></li>
+        <li><a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/runtime.md">Runtime and restore</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer class="wrap footer">
+    <a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/README.md">CLI and installation</a>
+    <a href="https://github.com/mlnomadpy/jax-diagnostics/blob/main/SKILL.md">Agent skill</a>
+  </footer>
+</body>
+</html>
