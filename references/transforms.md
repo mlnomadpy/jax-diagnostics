@@ -29,3 +29,13 @@ For `vmap`, compare mapped axis lengths and confirm that `in_axes` matches the i
 For NNX, use a graph-aware transform when passing or mutating modules, or split graph and array state explicitly at a pure JAX boundary. For Linen, check variable collection scope, mutability, initialization shapes, and RNG stream names. Verify two consecutive calls and compare the expected state updates and RNG behavior.
 
 [Flax NNX transforms](https://flax.readthedocs.io/en/latest/guides/nnx_basics.html)
+
+## JAX-GRAD-002
+
+Reverse-mode autodiff reached `lax.while_loop` or `lax.fori_loop` with a dynamic trip count. Identify the stopping rule and look for a valid static upper bound in the caller's contract. Use a fixed-length `lax.scan` or a statically bounded `lax.fori_loop` and carry the state, iteration count, and any stop flag. Freeze the state and count after the original stopping rule fires. Keep a runtime iteration limit in the active predicate when the caller can vary it.
+
+Check that inactive updates are safe to evaluate. If they are undefined, use control flow or provide safe operands before masking. If the algorithm has no valid static bound and reverse mode is required, derive a backward rule for the intended semantics or revise the algorithm explicitly.
+
+Verify the forward state and step count, then compare reverse-mode gradients under JIT for zero steps, early exit, and cap exhaustion. For data-dependent stopping, choose derivative checks away from points where the chosen iteration count changes.
+
+[JAX structured control flow](https://docs.jax.dev/en/latest/control-flow.html#structured-control-flow-primitives)

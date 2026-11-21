@@ -50,6 +50,26 @@ class RoutingTest(unittest.TestCase):
         self.assertIsNone(diagnose("ValueError: something else"))
         self.assertIsNone(diagnose(""))
 
+    def test_static_slice_messages_route_to_dynamic_slice_guide(self):
+        for message in (
+            "IndexError: Slice entries must be static integers. Got slice(None, JitTracer(int32[]), None)",
+            "IndexError: Array slice indices must have static start/stop/step to be used with NumPy indexing syntax.",
+        ):
+            with self.subTest(message=message):
+                self.assertEqual(diagnose(message).id, "JAX-INDEX-002")
+
+    def test_reverse_mode_dynamic_loop_has_a_specific_route(self):
+        message = (
+            "ValueError: Reverse-mode differentiation does not work for "
+            "lax.while_loop or lax.fori_loop with dynamic start/stop values. "
+            "Try using lax.scan, or using fori_loop with static start/stop."
+        )
+        self.assertEqual(diagnose(message).id, "JAX-GRAD-002")
+
+    def test_unrelated_index_and_loop_errors_do_not_match(self):
+        self.assertIsNone(diagnose("IndexError: list index out of range"))
+        self.assertIsNone(diagnose("ValueError: lax.while_loop body returned an incompatible value"))
+
     def test_cli_json_reads_standard_input(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/diagnose.py"), "--json"],

@@ -33,6 +33,8 @@ These 12 exception routes cover the [pinned public JAX exception exports](https:
 | Recompilation or slow tracing | [JAX-COMPILE-001](reference/runtime.md#jax-compile-001) |
 | Flax state or scope mismatch | [JAX-STATE-001](reference/transforms.md#jax-state-001) |
 | Cross-framework drift | [JAX-PARITY-001](reference/numerics.md#jax-parity-001) |
+| Dynamic slice start, stop or step under JIT | [JAX-INDEX-002](reference/shapes.md#jax-index-002) |
+| Reverse-mode differentiation through dynamic loops | [JAX-GRAD-002](reference/transforms.md#jax-grad-002) |
 | Gradient or custom derivative | [JAX-GRAD-001](reference/transforms.md#jax-grad-001) |
 | Mapped axes or scan carry | [JAX-AXIS-001](reference/transforms.md#jax-axis-001) |
 | Shapes or broadcasting | [JAX-SHAPE-002](reference/shapes.md#jax-shape-002) |

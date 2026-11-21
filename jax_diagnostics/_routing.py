@@ -35,6 +35,14 @@ ERRORS = {
 
 # More specific symptoms win when multiple phrases describe the same failure.
 SYMPTOMS = (
+    (
+        r"slice entries must be static integers|array slice indices must have static start/stop/step",
+        Diagnosis("JAX-INDEX-002", "shapes", "Dynamic slice bounds under JIT"),
+    ),
+    (
+        r"reverse-mode differentiation does not work for\s+lax\.(?:while_loop|fori_loop)\b",
+        Diagnosis("JAX-GRAD-002", "transforms", "Reverse-mode differentiation through dynamic loops"),
+    ),
     (r"mosaic|\bpallas\b|semaphore deadlock|\bvmem\b", Diagnosis("JAX-KERNEL-001", "runtime", "Pallas or Mosaic kernel failure")),
     (r"RESOURCE_EXHAUSTED|out of memory|\boom\b", Diagnosis("JAX-MEM-001", "runtime", "Device memory exhaustion")),
     (r"non[- ]finite|\bnan(?:s)?\b|\binf(?:s)?\b|\binfinity\b", Diagnosis("JAX-NUM-001", "numerics", "Non-finite numerical result")),

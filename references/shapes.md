@@ -23,3 +23,15 @@ Find the operation rejecting the type and inspect the operand dtypes, Python sca
 Inspect operand rank, index dtype and shape, traced slice bounds, and required out-of-bounds semantics. Choose an indexing operation that supports the actual index type and has a statically known output shape. Verify boundary indices explicitly. Some JAX gathers and updates handle out-of-bounds indices without raising.
 
 [JAX indexing sharp bits](https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html#out-of-bounds-indexing)
+
+## JAX-INDEX-002
+
+Under JIT, ordinary slice syntax expects static bounds. First identify which index depends on runtime values and whether the result needs a fixed size or a runtime-dependent prefix, rectangle, or window.
+
+- For a fixed-size window at a runtime position, use `lax.dynamic_slice` with static sizes. Check the boundary behavior explicitly. JAX can shift a start index inward to fit the requested window.
+- For runtime extents within a fixed buffer, build a mask by comparing each axis's broadcasted `jnp.arange` with its extent. Use `jnp.where` to keep valid entries and fill the rest. For a reduction over a prefix, mask contributions before reducing.
+- When a caller truly needs a variable-length array, decide whether to return a padded array with a valid length or move the final variable-length selection outside JIT.
+
+Verify zero, full, and mixed extents in the same compiled function. Check shape, fill values, and gradients when the operation participates in autodiff.
+
+[JAX dynamic slicing](https://docs.jax.dev/en/latest/_autosummary/jax.lax.dynamic_slice.html)
