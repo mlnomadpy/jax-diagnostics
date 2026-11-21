@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jax-diagnostics"
+version = "0.1.0"
+description = "Repair guides for JAX errors and accelerator failures"
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.scripts]
+jax-diagnose = "jax_diagnostics.cli:main"
+
+[tool.setuptools]
+packages = ["jax_diagnostics"]

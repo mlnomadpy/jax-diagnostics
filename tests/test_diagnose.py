@@ -4,7 +4,7 @@ import subprocess
 import sys
 import unittest
 
-from scripts.diagnose import ERRORS, SYMPTOMS, diagnose
+from jax_diagnostics._routing import ERRORS, SYMPTOMS, diagnose
 
 ROOT = Path(__file__).resolve().parent.parent
 
