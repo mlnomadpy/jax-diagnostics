@@ -7,14 +7,14 @@ description: Route JAX exceptions and symptoms from tracing, numerical failures,
 
 Select a route from the final exception and the first operation that fails. If only a symptom is available, treat the route as a hypothesis. Record the failing transform, input shapes and dtypes, package versions and backend before changing the reproducer. Follow the verification step for the selected route.
 
+Run `python3 scripts/diagnose.py 'ErrorName'` from this skill directory. For a traceback, pipe the saved text into the same command. The script reads the supplied text locally and prints a diagnostic ID and guide link. Use the index below when a shell is unavailable.
+
 | Evidence | Guide |
 |---|---|
-| `ConcretizationTypeError`, `TracerBoolConversionError`, `TracerIntegerConversionError`, `TracerArrayConversionError`, `NonConcreteBooleanIndexError` | [JAX-TRACE-001](references/tracing.md#jax-trace-001) |
-| `UnexpectedTracerError` or a tracer reported by the leak checker | [JAX-TRACE-002](references/tracing.md#jax-trace-002) |
-| NaN, Inf, non-finite gradients, or finite eager output with non-finite compiled output | [JAX-NUM-001](references/numerics.md#jax-num-001) |
-| JAX and another framework disagree on the same checkpoint | [JAX-PARITY-001](references/numerics.md#jax-parity-001) |
-| Repeated JIT compilation or slow first execution | [JAX-COMPILE-001](references/runtime.md#jax-compile-001) |
-| Device OOM, unexpected replication, or TPU kernel memory failure | [JAX-MEM-001](references/runtime.md#jax-mem-001) |
-| Orbax restore fails or continuation diverges after restore | [JAX-RESTORE-001](references/runtime.md#jax-restore-001) |
+| Named JAX exception from tracing, conversion, or masking | [Tracing](references/tracing.md) |
+| Symbolic dimension, shape, dtype or indexing exception | [Shapes, types, and indexing](references/shapes.md) |
+| Jaxpr, PRNG reuse, gradients, mapped axes, or Flax state | [Transformations and state](references/transforms.md) |
+| Non-finite values or JAX–PyTorch output mismatch | [Numerics](references/numerics.md) |
+| Backend crashes, memory, recompilation, sharding, Pallas, collectives, transfers, donation, or Orbax | [Runtime and restore](references/runtime.md) |
 
-Include the diagnostic ID and observed evidence in the handoff. When no route fits, preserve the exact error and narrow the failing operation first. Use existing reproduction artifacts before requesting a new accelerator run.
+An exact exception match identifies the error family. A symptom match suggests where to begin. Include the diagnostic ID and observed evidence in the handoff. When no route fits, narrow the failing operation before guessing. Reuse existing reproduction artifacts before requesting accelerator work.
