@@ -32,10 +32,8 @@ For NNX, use a graph-aware transform when passing or mutating modules, or split 
 
 ## JAX-GRAD-002
 
-Reverse-mode autodiff reached `lax.while_loop` or `lax.fori_loop` with a dynamic trip count. Identify the stopping rule and look for a valid static upper bound in the caller's contract. Use a fixed-length `lax.scan` or a statically bounded `lax.fori_loop` and carry the state, iteration count, and any stop flag. Freeze the state and count after the original stopping rule fires. Keep a runtime iteration limit in the active predicate when the caller can vary it.
+For reverse mode, replace a dynamic `lax.while_loop` or `lax.fori_loop` with `lax.scan` or a static `lax.fori_loop` using a valid hard cap. Carry state and step count. Freeze both once the original stop rule fires, including any runtime step limit. Use control flow or safe operands when inactive updates are undefined. Without a valid cap, derive a backward rule or revise the algorithm.
 
-Check that inactive updates are safe to evaluate. If they are undefined, use control flow or provide safe operands before masking. If the algorithm has no valid static bound and reverse mode is required, derive a backward rule for the intended semantics or revise the algorithm explicitly.
-
-Verify the forward state and step count, then compare reverse-mode gradients under JIT for zero steps, early exit, and cap exhaustion. For data-dependent stopping, choose derivative checks away from points where the chosen iteration count changes.
+Verify state, count, and reverse-mode gradients under JIT for zero steps, early exit, and cap exhaustion. Check gradients away from iteration-count transitions.
 
 [JAX structured control flow](https://docs.jax.dev/en/latest/control-flow.html#structured-control-flow-primitives)

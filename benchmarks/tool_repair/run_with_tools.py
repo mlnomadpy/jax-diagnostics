@@ -2,6 +2,7 @@
 
 import argparse
 import concurrent.futures
+import hashlib
 import inspect
 import json
 from pathlib import Path
@@ -32,25 +33,38 @@ When finished, leave the patch in solution.py and summarize the work briefly.
 """
 
 
-def context(case, traceback):
+def skill_context(route, read_text):
+    skill = read_text("SKILL.md")
+    if route:
+        guide, anchor = route.link.split("#")
+        header = f"## {anchor.upper()}"
+        section = read_text(guide).split(header, 1)[1].split("\n## ", 1)[0]
+        skill += f"\n\nRouted guide\n{header}{section}"
+    return f"\n\nJAX Diagnostics skill\n{skill}"
+
+
+def context(case, traceback, baseline):
     obj = jax
     for segment in case["docs"].split(".")[1:]:
         obj = getattr(obj, segment)
     docs = (inspect.getdoc(obj) or "")[:2400]
     assert docs
-    skill = (ROOT / "SKILL.md").read_text()
     route = diagnose(traceback)
-    if route:
-        guide, anchor = route.link.split("#")
-        header = f"## {anchor.upper()}"
-        section = (ROOT / guide).read_text().split(header, 1)[1].split("\n## ", 1)[0]
-        skill += f"\n\nRouted guide\n{header}{section}"
-    return {"raw": "", "docs": f"\n\nUpstream JAX documentation\n{docs}",
-            "skill": f"\n\nJAX Diagnostics skill\n{skill}"}, route.id if route else None
+    current = skill_context(route, lambda path: (ROOT / path).read_text())
+    if baseline:
+        old = skill_context(route, lambda path: subprocess.check_output(
+            ["git", "show", f"{baseline}:{path}"], cwd=ROOT, text=True,
+        ))
+        return {"old": old, "short": current}, route.id if route else None
+    return {
+        "raw": "",
+        "docs": f"\n\nUpstream JAX documentation\n{docs}",
+        "skill": current,
+    }, route.id if route else None
 
 
-def preflight():
-    prompts = {}
+def preflight(baseline=None):
+    prompts, guidance = {}, {}
     with tempfile.TemporaryDirectory(prefix="jax-tool-preflight-") as temp:
         directory = Path(temp)
         for name, case in CASES.items():
@@ -60,7 +74,10 @@ def preflight():
             assert broken.returncode and case["error"] in broken.stderr, (name, broken.stderr)
             traceback = broken.stderr.replace(str(directory.resolve()) + "/", "")
             traceback = traceback.replace(str(Path(sys.prefix)), "<venv>")
-            arms, route = context(case, traceback)
+            arms, route = context(case, traceback, baseline)
+            guidance[name] = {arm: {"bytes": len(extra.encode()),
+                                     "sha256": hashlib.sha256(extra.encode()).hexdigest()}
+                              for arm, extra in arms.items()}
 
             (directory / "solution.py").write_text(case["reference"])
             (directory / "verify.py").write_text(case["verify"])
@@ -70,7 +87,7 @@ def preflight():
             prompts[name] = {arm: f"{PROMPT}\n{case['task']}\n\nOriginal failing check\n{traceback}{extra}"
                              for arm, extra in arms.items()}
             print(f"Preflight passed: {name}; skill route {route}", flush=True)
-    return prompts
+    return prompts, guidance
 
 
 def trial(case, arm, repeat, prompt, output):
@@ -140,25 +157,51 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("--preflight-only", action="store_true")
+    parser.add_argument("--compare-skill-to", metavar="COMMIT",
+                        help="Pair current skill guidance with this earlier Git revision.")
     args = parser.parse_args()
     assert jax.__version__ == jaxlib.__version__ == "0.10.0" and jax.default_backend() == "cpu"
-    prompts = preflight()
+    baseline = None
+    if args.compare_skill_to:
+        baseline = subprocess.check_output(
+            ["git", "rev-parse", "--verify", f"{args.compare_skill_to}^{{commit}}"],
+            cwd=ROOT, text=True,
+        ).strip()
+    prompts, guidance = preflight(baseline)
     if args.preflight_only:
         return
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
-    schedule = [(case, arm, repeat) for repeat in (1, 2) for case in CASES for arm in ARMS]
-    random.Random(20261122).shuffle(schedule)
+    rng = random.Random(20261122)
+    if baseline:
+        pairs = [(case, repeat) for repeat in (1, 2) for case in CASES]
+        rng.shuffle(pairs)
+        schedule = []
+        for case, repeat in pairs:
+            arms = ["old", "short"]
+            rng.shuffle(arms)
+            schedule.extend((case, arm, repeat) for arm in arms)
+        # Each wave starts two matched pairs, with both versions represented twice.
+        waves = [schedule[i:i + 4] for i in range(0, len(schedule), 4)]
+        (output / "guidance.json").write_text(json.dumps(
+            {"baseline_revision": baseline, "guidance": guidance}, indent=2) + "\n")
+    else:
+        schedule = [(case, arm, repeat) for repeat in (1, 2) for case in CASES for arm in ARMS]
+        rng.shuffle(schedule)
+        waves = [schedule]
+
     results = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-        pending = {pool.submit(trial, case, arm, repeat, prompts[case][arm], output): position
-                   for position, (case, arm, repeat) in enumerate(schedule)}
-        for done in concurrent.futures.as_completed(pending):
-            row = {**done.result(), "schedule_position": pending[done]}
-            results.append(row)
-            print(json.dumps(row), flush=True)
-            (output / "results.json").write_text(json.dumps(
-                sorted(results, key=lambda item: item["schedule_position"]), indent=2) + "\n")
+        for wave in waves:
+            start = len(results)
+            pending = {pool.submit(trial, case, arm, repeat, prompts[case][arm], output): start + i
+                       for i, (case, arm, repeat) in enumerate(wave)}
+            for done in concurrent.futures.as_completed(pending):
+                row = {**done.result(), "schedule_position": pending[done]}
+                results.append(row)
+                print(json.dumps(row), flush=True)
+                (output / "results.json").write_text(json.dumps(
+                    sorted(results, key=lambda item: item["schedule_position"]), indent=2) + "\n")
 
 
 if __name__ == "__main__":

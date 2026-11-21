@@ -14,9 +14,7 @@ Verify the original transformed call with multiple input values or both predicat
 
 ## JAX-TRACE-002
 
-A transformed function let a tracer escape through a global, closure, object mutation, or container append.
-
-Reproduce with `jax.checking_leaks()` around the smallest failing transformed call. Identify the reference that retains the tracer and return the needed values explicitly or thread the state through the transform. Check the original repeated-call sequence and run the leak checker on it again.
+Use `jax.checking_leaks()` around the smallest failing call. Find the global, closure, or mutation retaining a tracer. Pass needed values explicitly or return them as state. Rerun the original call sequence with leak checking.
 
 [JAX tracer leaks](https://docs.jax.dev/en/latest/errors.html#jax.errors.UnexpectedTracerError)
 

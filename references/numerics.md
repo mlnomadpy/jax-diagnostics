@@ -2,9 +2,7 @@
 
 ## JAX-NUM-001
 
-Use the original failing input and preserve backend, precision, masking and compilation settings. Locate the first non-finite tensor in the forward pass, loss, gradient, or optimizer update. For a small JIT reproduction, try `jax_debug_nans`. Use `checkify` or targeted finite assertions to inspect intermediates when the failure only occurs in compiled execution or involves Inf.
-
-Inspect the operands immediately before the first failing operation. Common checks include fully masked reductions, zero denominators, invalid logarithm inputs, and low-precision overflow. A finite eager result can help isolate the compiled path. Verify the repair under the original transform and backend with the failing input and a nearby valid case.
+Keep the failing input, transform, backend, and precision. Find the first NaN or Inf in the forward pass, gradient, or update with `jax_debug_nans`, `checkify`, or targeted checks. Inspect operands for invalid domains, singular gradients, masked reductions, or overflow. Verify the failing input and a nearby valid one under the original settings.
 
 [JAX debugging flags](https://docs.jax.dev/en/latest/debugging/flags.html)
 

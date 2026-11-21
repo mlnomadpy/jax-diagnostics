@@ -26,12 +26,12 @@ Inspect operand rank, index dtype and shape, traced slice bounds, and required o
 
 ## JAX-INDEX-002
 
-Under JIT, ordinary slice syntax expects static bounds. First identify which index depends on runtime values and whether the result needs a fixed size or a runtime-dependent prefix, rectangle, or window.
+Under JIT, choose by result shape:
 
-- For a fixed-size window at a runtime position, use `lax.dynamic_slice` with static sizes. Check the boundary behavior explicitly. JAX can shift a start index inward to fit the requested window.
-- For runtime extents within a fixed buffer, build a mask by comparing each axis's broadcasted `jnp.arange` with its extent. Use `jnp.where` to keep valid entries and fill the rest. For a reduction over a prefix, mask contributions before reducing.
-- When a caller truly needs a variable-length array, decide whether to return a padded array with a valid length or move the final variable-length selection outside JIT.
+- Fixed window, runtime start: use `lax.dynamic_slice` with static sizes. Check clamping.
+- Runtime extent in a fixed buffer: compare broadcasted `jnp.arange` on each axis with the extent. Use `jnp.where` to preserve valid entries and fill the rest, or mask contributions before reducing.
+- Variable-length output: return padding and a valid length, or select outside JIT.
 
-Verify zero, full, and mixed extents in the same compiled function. Check shape, fill values, and gradients when the operation participates in autodiff.
+Test zero, full, and mixed extents under JIT. Check shape, fill, and gradients.
 
 [JAX dynamic slicing](https://docs.jax.dev/en/latest/_autosummary/jax.lax.dynamic_slice.html)
