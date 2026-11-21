@@ -2,7 +2,9 @@
 
 **Put a repair guide in the traceback.** JAX Diagnostics is a standalone Python library, CLI, and agent skill for JAX errors. It follows the diagnostic pattern in [Solid 2.0](https://www.solidjs.com/blog/solid-2-0-the-long-hold/). A matched failure gets a stable diagnostic ID and a link to the relevant guide.
 
-[Landing page](https://www.tahabouhsine.com/jax-diagnostics/) · [Agent skill](SKILL.md) · [Diagnostic guides](#diagnostic-guides)
+[Landing page](https://www.tahabouhsine.com/jax-diagnostics/) · [Documentation](https://www.tahabouhsine.com/jax-diagnostics/docs/) · [Blog](https://www.tahabouhsine.com/jax-diagnostics/docs/blog/) · [Agent skill](https://github.com/mlnomadpy/jax-diagnostics/blob/main/SKILL.md) · [Diagnostic guides](#diagnostic-guides)
+
+[![Skills.sh installs](https://skills.sh/b/mlnomadpy/jax-diagnostics)](https://skills.sh/mlnomadpy/jax-diagnostics/jax-diagnostics)
 
 ## Install the agent skill
 
@@ -56,12 +58,12 @@ All 12 named exceptions in the pinned public `jax.errors` module have dedicated 
 
 | Guide | What it covers |
 | --- | --- |
-| [Tracing](references/tracing.md) | Concretization, tracer escapes, Python and NumPy conversions, boolean indexing |
-| [Shapes and types](references/shapes.md) | Symbolic dimensions, broadcasting, dtypes, indexing |
-| [Transforms and state](references/transforms.md) | Jaxpr, PRNG key reuse, gradients, mapped axes, Flax state |
-| [Numerics and parity](references/numerics.md) | NaNs, infinities, and cross-framework mismatches |
-| [Runtime and restore](references/runtime.md) | Compilation, memory, sharding, collectives, Pallas, and Orbax |
+| [Tracing](https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/tracing.md) | Concretization, tracer escapes, Python and NumPy conversions, boolean indexing |
+| [Shapes and types](https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/shapes.md) | Symbolic dimensions, broadcasting, dtypes, indexing |
+| [Transforms and state](https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/transforms.md) | Jaxpr, PRNG key reuse, gradients, mapped axes, Flax state |
+| [Numerics and parity](https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/numerics.md) | NaNs, infinities, and cross-framework mismatches |
+| [Runtime and restore](https://github.com/mlnomadpy/jax-diagnostics/blob/main/references/runtime.md) | Compilation, memory, sharding, collectives, Pallas, and Orbax |
 
 ## Development
 
-Run `python3 -m unittest discover -s tests` to verify the router, guides, and exception notes. The landing page is plain HTML, CSS, and JavaScript. Open [docs/index.html](docs/index.html) directly or serve it with `python3 -m http.server --directory docs`.
+See the [development and release guide](https://www.tahabouhsine.com/jax-diagnostics/docs/development/) for building the docs, testing the skill, and preparing PyPI artifacts.

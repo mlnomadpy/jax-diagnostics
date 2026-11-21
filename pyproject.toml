@@ -8,6 +8,20 @@ version = "0.1.0"
 description = "Repair guides for JAX errors and accelerator failures"
 readme = "README.md"
 requires-python = ">=3.11"
+keywords = ["jax", "debugging", "traceback", "diagnostics", "agent-skills"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Debuggers",
+]
+
+[project.urls]
+Homepage = "https://www.tahabouhsine.com/jax-diagnostics/"
+Documentation = "https://www.tahabouhsine.com/jax-diagnostics/docs/"
+Repository = "https://github.com/mlnomadpy/jax-diagnostics"
+Issues = "https://github.com/mlnomadpy/jax-diagnostics/issues"
 
 [project.scripts]
 jax-diagnose = "jax_diagnostics.cli:main"

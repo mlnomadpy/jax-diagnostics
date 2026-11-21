@@ -1,0 +1,32 @@
+site_name: JAX Diagnostics
+site_url: https://www.tahabouhsine.com/jax-diagnostics/docs/
+site_description: Annotate JAX tracebacks with focused repair guides.
+repo_url: https://github.com/mlnomadpy/jax-diagnostics
+docs_dir: handbook
+site_dir: site/docs
+strict: true
+theme: readthedocs
+plugins:
+  - search
+hooks:
+  - scripts/mkdocs_references.py
+markdown_extensions:
+  - fenced_code
+  - tables
+nav:
+  - Overview: index.md
+  - Quickstart: quickstart.md
+  - Python API: python-api.md
+  - CLI and agent skill: cli-and-skill.md
+  - Diagnostic reference:
+      - Catalog: diagnostics.md
+      - Tracing: reference/tracing.md
+      - Shapes and dtypes: reference/shapes.md
+      - Transforms and state: reference/transforms.md
+      - Numerics and parity: reference/numerics.md
+      - Runtime and restore: reference/runtime.md
+  - Blog:
+      - Blog home: blog/index.md
+      - Why put repair links in tracebacks?: blog/repair-links-in-tracebacks.md
+  - Roadmap: roadmap.md
+  - Development and releases: development.md
