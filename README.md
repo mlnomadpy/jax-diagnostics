@@ -2,7 +2,7 @@
 
 **Put a repair guide in the traceback.** JAX Diagnostics is a standalone Python library, CLI, and agent skill for JAX errors. It follows the diagnostic pattern in [Solid 2.0](https://www.solidjs.com/blog/solid-2-0-the-long-hold/). A matched failure gets a stable diagnostic ID and a link to the relevant guide.
 
-[Landing page](https://mlnomadpy.github.io/jax-diagnostics/) · [Agent skill](SKILL.md) · [Diagnostic guides](#diagnostic-guides)
+[Landing page](https://www.tahabouhsine.com/jax-diagnostics/) · [Agent skill](SKILL.md) · [Diagnostic guides](#diagnostic-guides)
 
 ## Install the agent skill
 

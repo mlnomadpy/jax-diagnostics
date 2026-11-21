@@ -100,10 +100,23 @@ pre {
 .setup { display: grid; gap: 1rem; }
 .setup pre { background: #dfe6f0; padding: .85rem; border-radius: .25rem; margin-top: .35rem; }
 .guides { padding-block: 3rem; }
-.guides ul { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; list-style: none; padding: 0; }
 .footer { justify-content: flex-start; border-top: 1px solid var(--line); }
 @media (max-width: 46rem) {
   .wrap { width: calc(100% - 2rem); }
   .hero, .quickstart { grid-template-columns: 1fr; }
   .hero { padding-block: 3rem; }
+}
+.guide-details {
+  display: grid;
+  list-style: none;
+  padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  margin-block: 1.5rem;
+}
+.guide-details li { border-top: 1px solid var(--line); padding-top: .8rem; }
+.guide-details p { margin-top: .3rem; }
+.guide-details code { overflow-wrap: anywhere; }
+@media (max-width: 46rem) {
+  .guide-details { grid-template-columns: 1fr; }
 }
